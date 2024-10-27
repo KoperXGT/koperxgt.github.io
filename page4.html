@@ -4,30 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formularz</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <form id="formularz">
-            <h2>Wprowadź swoje dane</h2>
-            <label for="imie">Imię:</label>
-            <input type="text" id="imie" name="imie" required>
-
-            <label for="nazwisko">Nazwisko:</label>
-            <input type="text" id="nazwisko" name="nazwisko" required>
-
-            <label for="data_urodzenia">Data urodzenia:</label>
-            <input type="date" id="data_urodzenia" name="data_urodzenia" required>
-
-            <div class="buttons">
-                <button type="reset">Resetuj</button>
-                <button type="submit">Prześlij</button>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
-* {
+    <style>
+        * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -91,3 +69,26 @@ button[type="reset"] {
 button[type="submit"] {
     background-color: #4CAF50;
 }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="formularz">
+            <h2>Wprowadź swoje dane</h2>
+            <label for="imie">Imię:</label>
+            <input type="text" id="imie" name="imie" required>
+
+            <label for="nazwisko">Nazwisko:</label>
+            <input type="text" id="nazwisko" name="nazwisko" required>
+
+            <label for="data_urodzenia">Data urodzenia:</label>
+            <input type="date" id="data_urodzenia" name="data_urodzenia" required>
+
+            <div class="buttons">
+                <button type="reset">Resetuj</button>
+                <button type="submit">Prześlij</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
