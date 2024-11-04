@@ -35,7 +35,7 @@
       text-align: right;
       margin-bottom: 10px;
       border: none;
-      background-color: #222;
+      background-color: 5bb434;
       color: #fff;
       border-radius: 4px;
     }
@@ -58,6 +58,15 @@
       transform: scale(0.98);
     }
 
+    button: {
+      background-color: #555;
+      color: #fff;
+    }
+
+    button:nth-child(n+1):nth-child(n-3):nth-child(8):nth-child(12):nth-child(16):nth-child(20) {
+      background-color: #222;
+      color: #fff;
+
     button:nth-child(4) {
       background-color: #d9534f;
       color: #fff;
@@ -65,11 +74,6 @@
 
     button:nth-child(19) {
       background-color: #5bc0de;
-      color: #fff;
-    }
-
-    button:not(:nth-child(4)):not(:nth-child(19)) {
-      background-color: #555;
       color: #fff;
     }
 
