@@ -1,1 +1,122 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #ffdd80;
+        }
+
+        .container {
+            background-color: #eda6b5;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        form h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select{
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button[type="reset"] {
+            background-color: #f44336;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="formularz">
+            <h2>Wprowadź swoje dane</h2>
+            <label for="name">Imię:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="surname">Nazwisko:</label>
+            <input type="text" id="surname" name="surname" required>
+
+            <label for="date_of_birth">Data urodzenia:</label>
+            <input type="date" id="date_of_birth" name="date_of_birth" required>
+
+            <label for="sex">Płeć:</label>
+            <select id="sex" name="sex" required>
+                <option value="man">Mężczyzna</option>
+                <option value="female">Kobieta</option>
+            </select>
+
+            <label for="country">Państwo:</label>
+            <input type="text" id="country" name="country" required>
+
+            <label for="city">Miasto:</label>
+            <input type="text" id="city" name="city" required>
+
+            <label for="street">Ulica:</label>
+            <input type="text" id="street" name="street" required>
+
+            <label for="pnumber">Telefon:</label>
+            <input type="text" id="pnumber" name="pnumber" required>
+
+            <label for="licence">Czy posiadasz prawo jazdy?:</label>
+            <select id="licence" name="licence" required>
+                <option value="yes">Tak</option>
+                <option value="no">Nie</option>
+            </select>
+
+            <label for="password">Hasło:</label>
+            <input type="text" id="password" name="password" required>
+
+            <div class="buttons">
+                <button type="reset">Resetuj</button>
+                <button type="submit">Prześlij</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
