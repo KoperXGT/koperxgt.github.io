@@ -102,9 +102,11 @@
             </select>
 
             <label for="country">Państwo:</label>
+            <span class="error-message" id="error-country"></span>
             <input type="text" id="country" name="country" required>
 
             <label for="city">Miasto:</label>
+            <span class="error-message" id="error-city"></span>
             <input type="text" id="city" name="city" required>
 
             <label for="street">Ulica:</label>
@@ -134,35 +136,52 @@
         document.getElementById("formularz").addEventListener("submit", function(event) {
             let isValid = true;
 
-            const namePattern = /^[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$/;
-            const surnamePattern = /^[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$/;
+            const capitalizedPattern = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+$/;
             const phonePattern = /^\d{9}$/;
             const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
             const name = document.getElementById("name").value;
             const surname = document.getElementById("surname").value;
+            const country = document.getElementById("country").value;
+            const city = document.getElementById("city").value;
             const phone = document.getElementById("pnumber").value;
             const password = document.getElementById("password").value;
 
             const errorName = document.getElementById("error-name");
             const errorSurname = document.getElementById("error-surname");
+            const errorCountry = document.getElementById("error-country");
+            const errorCity = document.getElementById("error-city");
             const errorPnumber = document.getElementById("error-pnumber");
             const errorPassword = document.getElementById("error-password");
 
             errorName.style.display = "none";
             errorSurname.style.display = "none";
+            errorCountry.style.display = "none";
+            errorCity.style.display = "none";
             errorPnumber.style.display = "none";
             errorPassword.style.display = "none";
 
-            if (!namePattern.test(name)) {
-                errorName.textContent = "Imię może zawierać tylko litery.";
+            if (!capitalizedPattern.test(name)) {
+                errorName.textContent = "Imię musi zaczynać się wielką literą i może zawierać tylko litery.";
                 errorName.style.display = "block";
                 isValid = false;
             }
 
-            if (!surnamePattern.test(surname)) {
-                errorSurname.textContent = "Nazwisko może zawierać tylko litery.";
+            if (!capitalizedPattern.test(surname)) {
+                errorSurname.textContent = "Nazwisko musi zaczynać się wielką literą i może zawierać tylko litery.";
                 errorSurname.style.display = "block";
+                isValid = false;
+            }
+
+            if (!capitalizedPattern.test(country)) {
+                errorCountry.textContent = "Państwo musi zaczynać się wielką literą i może zawierać tylko litery.";
+                errorCountry.style.display = "block";
+                isValid = false;
+            }
+
+            if (!capitalizedPattern.test(city)) {
+                errorCity.textContent = "Miasto musi zaczynać się wielką literą i może zawierać tylko litery.";
+                errorCity.style.display = "block";
                 isValid = false;
             }
 
