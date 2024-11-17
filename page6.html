@@ -93,6 +93,7 @@
             <input type="text" id="surname" name="surname" required>
 
             <label for="date_of_birth">Data urodzenia:</label>
+            <span class="error-message" id="error-dateofbirth"></span>
             <input type="date" id="date_of_birth" name="date_of_birth" required>
 
             <label for="sex">Płeć:</label>
@@ -102,9 +103,11 @@
             </select>
 
             <label for="country">Państwo:</label>
+            <span class="error-message" id="error-country"></span>
             <input type="text" id="country" name="country" required>
 
             <label for="city">Miasto:</label>
+            <span class="error-message" id="error-city"></span>
             <input type="text" id="city" name="city" required>
 
             <label for="street">Ulica:</label>
@@ -134,35 +137,88 @@
         document.getElementById("formularz").addEventListener("submit", function(event) {
             let isValid = true;
 
-            const namePattern = /^[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$/;
-            const surnamePattern = /^[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$/;
+            const lettersPattern = /^[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$/;
+            const capitalizedPattern = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+$/;
             const phonePattern = /^\d{9}$/;
             const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
             const name = document.getElementById("name").value;
             const surname = document.getElementById("surname").value;
+            const dateofbirth = document.getElementById("date_of_birth").value;
+            const country = document.getElementById("country").value;
+            const city = document.getElementById("city").value;
             const phone = document.getElementById("pnumber").value;
             const password = document.getElementById("password").value;
 
+            const currentDate = new Date().toISOString().split("T")[0];
+
             const errorName = document.getElementById("error-name");
             const errorSurname = document.getElementById("error-surname");
+            const errorDateOfBirth = document.getElementById("error-dateofbirth");
+            const errorCountry = document.getElementById("error-country");
+            const errorCity = document.getElementById("error-city");
             const errorPnumber = document.getElementById("error-pnumber");
             const errorPassword = document.getElementById("error-password");
 
             errorName.style.display = "none";
             errorSurname.style.display = "none";
+            errorDateOfBirth.style.display = "none";
+            errorCountry.style.display = "none";
+            errorCity.style.display = "none";
             errorPnumber.style.display = "none";
             errorPassword.style.display = "none";
 
-            if (!namePattern.test(name)) {
+            if (!letterPattern.test(name)) {
                 errorName.textContent = "Imię może zawierać tylko litery.";
                 errorName.style.display = "block";
                 isValid = false;
             }
+            
+            if (!capitalizedPattern.test(name)) {
+                errorName.textContent = "Imię musi rozpoczynać się z wielkiej litery.";
+                errorName.style.display = "block";
+                isValid = false;
+            }
 
-            if (!surnamePattern.test(surname)) {
+            if (!letterPattern.test(surname)) {
                 errorSurname.textContent = "Nazwisko może zawierać tylko litery.";
                 errorSurname.style.display = "block";
+                isValid = false;
+            }
+
+            if (!capitalizedPattern.test(surname)) {
+                errorSurname.textContent = "Nazwisko musi rozpoczynać się z wielkiej litery.";
+                errorSurname.style.display = "block";
+                isValid = false;
+            }
+
+            if (!currentDate.test(dateofbirth)) {
+                errorDateOfBirth.textContent = "Data urodzenia nie może być przyszłą datą.";
+                errorDateOfBirth.style.display = "block";
+                isValid = false;
+            }
+            
+            if (!letterPattern.test(country)) {
+                errorCountry.textContent = "Państwo może zawierać tylko litery.";
+                errorCountry.style.display = "block";
+                isValid = false;
+            }
+            
+            if (!capitalizedPattern.test(country)) {
+                errorCountry.textContent = "Państwo musi rozpoczynać się z wielkiej litery.";
+                errorCountry.style.display = "block";
+                isValid = false;
+            }
+
+            if (!letterPattern.test(city)) {
+                errorCity.textContent = "Miasto może zawierać tylko litery.";
+                errorCity.style.display = "block";
+                isValid = false;
+            }
+            
+            if (!capitalizedPattern.test(city)) {
+                errorCity.textContent = "Miasto musi rozpoczynać się z wielkiej litery.";
+                errorCity.style.display = "block";
                 isValid = false;
             }
 
