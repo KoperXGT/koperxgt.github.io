@@ -93,6 +93,7 @@
             <input type="text" id="surname" name="surname" required>
 
             <label for="date_of_birth">Data urodzenia:</label>
+            <span class="error-message" id="error-date_of_birth"></span>
             <input type="date" id="date_of_birth" name="date_of_birth" required>
 
             <label for="sex">Płeć:</label>
@@ -140,8 +141,11 @@
             const phonePattern = /^\d{9}$/;
             const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
+            const currentDate = new Date().toISOString().split("T")[0];
+
             const name = document.getElementById("name").value;
             const surname = document.getElementById("surname").value;
+            const dateOfBirth = document.getElementById("date_of_birth").value;
             const country = document.getElementById("country").value;
             const city = document.getElementById("city").value;
             const phone = document.getElementById("pnumber").value;
@@ -149,6 +153,7 @@
 
             const errorName = document.getElementById("error-name");
             const errorSurname = document.getElementById("error-surname");
+            const errorDateOfBirth = document.getElementById("error-date_of_birth");
             const errorCountry = document.getElementById("error-country");
             const errorCity = document.getElementById("error-city");
             const errorPnumber = document.getElementById("error-pnumber");
@@ -156,6 +161,7 @@
 
             errorName.style.display = "none";
             errorSurname.style.display = "none";
+            errorDateOfBirth.style.display = "none";
             errorCountry.style.display = "none";
             errorCity.style.display = "none";
             errorPnumber.style.display = "none";
@@ -170,6 +176,12 @@
             if (!capitalizedPattern.test(surname)) {
                 errorSurname.textContent = "Nazwisko musi zaczynać się wielką literą i może zawierać tylko litery.";
                 errorSurname.style.display = "block";
+                isValid = false;
+            }
+
+            if (dateOfBirth > currentDate) {
+                errorDateOfBirth.textContent = "Data urodzenia nie może być w przyszłości.";
+                errorDateOfBirth.style.display = "block";
                 isValid = false;
             }
 
