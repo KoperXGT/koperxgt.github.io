@@ -54,6 +54,14 @@
             display: flex;
             justify-content: space-between;
         }
+        
+        .error-message {
+            color: red;
+            font-size: 12px;
+            text-align: left;
+            margin-bottom: 5px;
+            display: none;
+        }
 
         button {
             padding: 8px 12px;
@@ -77,9 +85,11 @@
         <form id="formularz">
             <h2>Wprowadź swoje dane</h2>
             <label for="name">Imię:</label>
+            <span class="error-message" id="error-name"></span>
             <input type="text" id="name" name="name" required>
 
             <label for="surname">Nazwisko:</label>
+            <span class="error-message" id="error-surname"></span>
             <input type="text" id="surname" name="surname" required>
 
             <label for="date_of_birth">Data urodzenia:</label>
@@ -101,6 +111,7 @@
             <input type="text" id="street" name="street" required>
 
             <label for="pnumber">Telefon:</label>
+            <span class="error-message" id="error-pnumber"></span>
             <input type="text" id="pnumber" name="pnumber" required>
 
             <label for="licence">Czy posiadasz prawo jazdy?:</label>
@@ -110,6 +121,7 @@
             </select>
 
             <label for="password">Hasło:</label>
+            <span class="error-message" id="error-password"></span>
             <input type="text" id="password" name="password" required>
 
             <div class="buttons">
@@ -120,6 +132,8 @@
     </div>
     <script>
         document.getElementById("formularz").addEventListener("submit", function(event) {
+            let isValid = true;
+
             const namePattern = /^[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$/;
             const surnamePattern = /^[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$/;
             const phonePattern = /^\d{9}$/;
@@ -130,23 +144,41 @@
             const phone = document.getElementById("pnumber").value;
             const password = document.getElementById("password").value;
 
+            const errorName = document.getElementById("error-name");
+            const errorSurname = document.getElementById("error-surname");
+            const errorPnumber = document.getElementById("error-pnumber");
+            const errorPassword = document.getElementById("error-password");
+
+            errorName.style.display = "none";
+            errorSurname.style.display = "none";
+            errorPnumber.style.display = "none";
+            errorPassword.style.display = "none";
+
             if (!namePattern.test(name)) {
-                alert("Imię może zawierać tylko litery.");
-                event.preventDefault();
+                errorName.textContent = "Imię może zawierać tylko litery.";
+                errorName.style.display = "block";
+                isValid = false;
             }
 
             if (!surnamePattern.test(surname)) {
-                alert("Nazwisko może zawierać tylko litery.");
-                event.preventDefault();
+                errorSurname.textContent = "Nazwisko może zawierać tylko litery.";
+                errorSurname.style.display = "block";
+                isValid = false;
             }
 
             if (!phonePattern.test(phone)) {
-                alert("Numer telefonu musi zawierać dokładnie 9 cyfr.");
-                event.preventDefault();
+                errorPnumber.textContent = "Numer telefonu musi zawierać dokładnie 9 cyfr.";
+                errorPnumber.style.display = "block";
+                isValid = false;
             }
 
             if (!passwordPattern.test(password)) {
-                alert("Hasło musi mieć co najmniej 8 znaków, zawierać jedną literę i jedną cyfrę.");
+                errorPassword.textContent = "Hasło musi mieć co najmniej 8 znaków, zawierać jedną literę i jedną cyfrę.";
+                errorPassword.style.display = "block";
+                isValid = false;
+            }
+
+            if (!isValid) {
                 event.preventDefault();
             }
         });
